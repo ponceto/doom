@@ -6,7 +6,7 @@
 #
 CC=  gcc  # gcc or g++
 
-CFLAGS=-g -Wall -DNORMALUNIX -DLINUX # -DUSEASM 
+CFLAGS=-g -Wall -Wno-unused-const-variable -Wno-unused-result -Wno-unused-but-set-variable -DNORMALUNIX -DLINUX # -DUSEASM 
 LDFLAGS=-L/usr/X11R6/lib
 LIBS=-lXext -lX11 -lnsl -lm
 

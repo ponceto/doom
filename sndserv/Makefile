@@ -7,7 +7,7 @@
 #
 
 CC=gcc
-CFLAGS=-O -DNORMALUNIX -DLINUX
+CFLAGS=-O -DNORMALUNIX -DLINUX -Wall -Wno-unused-const-variable -Wno-unused-result -Wno-unused-but-set-variable
 LDFLAGS=
 LIBS=-lm
 
