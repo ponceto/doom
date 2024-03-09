@@ -1,0 +1,298 @@
+#
+# Makefile.wasm - Copyright (c) 2024 - Olivier Poncet
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+# ----------------------------------------------------------------------------
+# global environment
+# ----------------------------------------------------------------------------
+
+OPTLEVEL = -O2
+WARNINGS = -Wall
+EXTRAS   = -sUSE_SDL=2 -sUSE_SDL_MIXER=2
+CC       = emcc
+CFLAGS   = -std=c99 $(OPTLEVEL) $(WARNINGS) $(EXTRAS)
+CXX      = em++
+CXXFLAGS = -std=c++14 $(OPTLEVEL) $(WARNINGS) $(EXTRAS)
+CPPFLAGS = -I. -D_DEFAULT_SOURCE -DNORMALUNIX -DLINUX -D_FORTIFY_SOURCE=2
+LD       = em++
+LDFLAGS  = -O2 -L.
+CP       = cp
+CPFLAGS  = -f
+RM       = rm
+RMFLAGS  = -f
+
+# ----------------------------------------------------------------------------
+# default rules
+# ----------------------------------------------------------------------------
+
+.c.o :
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) $<
+
+.cc.o :
+	$(CXX) -c $(CXXFLAGS) $(CPPFLAGS) $<
+
+# ----------------------------------------------------------------------------
+# global targets
+# ----------------------------------------------------------------------------
+
+all : build
+
+build : build_doom
+	@echo "=== $@ ok ==="
+
+clean : clean_doom
+	@echo "=== $@ ok ==="
+
+# ----------------------------------------------------------------------------
+# doom files
+# ----------------------------------------------------------------------------
+
+doom_PROGRAM = doom.html
+
+doom_SOURCES = \
+	am_map.c \
+	d_items.c \
+	d_main.c \
+	d_net.c \
+	f_finale.c \
+	f_wipe.c \
+	g_game.c \
+	hu_lib.c \
+	hu_stuff.c \
+	i_main.c \
+	i_net.c \
+	i_sound_sdl.c \
+	i_system.c \
+	i_video_sdl.c \
+	m_argv.c \
+	m_bbox.c \
+	m_cheat.c \
+	m_fixed.c \
+	m_menu.c \
+	m_misc.c \
+	m_random.c \
+	m_swap.c \
+	p_ceilng.c \
+	p_doors.c \
+	p_enemy.c \
+	p_floor.c \
+	p_inter.c \
+	p_lights.c \
+	p_map.c \
+	p_maputl.c \
+	p_mobj.c \
+	p_plats.c \
+	p_pspr.c \
+	p_saveg.c \
+	p_setup.c \
+	p_sight.c \
+	p_spec.c \
+	p_switch.c \
+	p_telept.c \
+	p_tick.c \
+	p_user.c \
+	r_bsp.c \
+	r_data.c \
+	r_draw.c \
+	r_main.c \
+	r_plane.c \
+	r_segs.c \
+	r_sky.c \
+	r_things.c \
+	s_sound.c \
+	st_lib.c \
+	st_stuff.c \
+	v_video.c \
+	wi_stuff.c \
+	w_wad.c \
+	z_zone.c \
+	doomdef.c \
+	doomstat.c \
+	dstrings.c \
+	info.c \
+	sounds.c \
+	tables.c \
+	$(NULL)
+
+doom_HEADERS = \
+	am_map.h \
+	d_englsh.h \
+	d_event.h \
+	d_french.h \
+	d_items.h \
+	d_main.h \
+	d_net.h \
+	d_player.h \
+	d_textur.h \
+	d_think.h \
+	d_ticcmd.h \
+	f_finale.h \
+	f_wipe.h \
+	g_game.h \
+	hu_lib.h \
+	hu_stuff.h \
+	i_net.h \
+	i_sound.h \
+	i_sound_sdl.h \
+	i_system.h \
+	i_video.h \
+	i_video_sdl.h \
+	m_argv.h \
+	m_bbox.h \
+	m_cheat.h \
+	m_fixed.h \
+	m_menu.h \
+	m_misc.h \
+	m_random.h \
+	m_swap.h \
+	p_inter.h \
+	p_local.h \
+	p_mobj.h \
+	p_pspr.h \
+	p_saveg.h \
+	p_setup.h \
+	p_spec.h \
+	p_tick.h \
+	r_bsp.h \
+	r_data.h \
+	r_defs.h \
+	r_draw.h \
+	r_local.h \
+	r_main.h \
+	r_plane.h \
+	r_segs.h \
+	r_sky.h \
+	r_state.h \
+	r_things.h \
+	s_sound.h \
+	st_lib.h \
+	st_stuff.h \
+	v_video.h \
+	wi_stuff.h \
+	w_wad.h \
+	z_zone.h \
+	doomdata.h \
+	doomdef.h \
+	doomstat.h \
+	doomtype.h \
+	dstrings.h \
+	info.h \
+	sounds.h \
+	tables.h \
+	$(NULL)
+
+doom_OBJECTS = \
+	am_map.o \
+	d_items.o \
+	d_main.o \
+	d_net.o \
+	f_finale.o \
+	f_wipe.o \
+	g_game.o \
+	hu_lib.o \
+	hu_stuff.o \
+	i_main.o \
+	i_net.o \
+	i_sound_sdl.o \
+	i_system.o \
+	i_video_sdl.o \
+	m_argv.o \
+	m_bbox.o \
+	m_cheat.o \
+	m_fixed.o \
+	m_menu.o \
+	m_misc.o \
+	m_random.o \
+	m_swap.o \
+	p_ceilng.o \
+	p_doors.o \
+	p_enemy.o \
+	p_floor.o \
+	p_inter.o \
+	p_lights.o \
+	p_map.o \
+	p_maputl.o \
+	p_mobj.o \
+	p_plats.o \
+	p_pspr.o \
+	p_saveg.o \
+	p_setup.o \
+	p_sight.o \
+	p_spec.o \
+	p_switch.o \
+	p_telept.o \
+	p_tick.o \
+	p_user.o \
+	r_bsp.o \
+	r_data.o \
+	r_draw.o \
+	r_main.o \
+	r_plane.o \
+	r_segs.o \
+	r_sky.o \
+	r_things.o \
+	s_sound.o \
+	st_lib.o \
+	st_stuff.o \
+	v_video.o \
+	wi_stuff.o \
+	w_wad.o \
+	z_zone.o \
+	doomdef.o \
+	doomstat.o \
+	dstrings.o \
+	info.o \
+	sounds.o \
+	tables.o \
+	$(NULL)
+
+doom_LDFLAGS = \
+	--use-preload-plugins \
+	--preload-file doom1.wad \
+	$(NULL)
+
+doom_LDADD = \
+	-lSDL2_mixer \
+	-lSDL2 \
+	$(NULL)
+
+doom_CLEANFILES = \
+	doom.bin \
+	doom.data \
+	doom.html \
+	doom.wasm \
+	doom.js \
+	$(NULL)
+
+# ----------------------------------------------------------------------------
+# build doom
+# ----------------------------------------------------------------------------
+
+build_doom : $(doom_PROGRAM)
+
+$(doom_PROGRAM) : $(doom_OBJECTS)
+	$(LD) $(LDFLAGS) $(doom_LDFLAGS) -o $(doom_PROGRAM) $(doom_OBJECTS) $(doom_LDADD)
+
+# ----------------------------------------------------------------------------
+# clean doom
+# ----------------------------------------------------------------------------
+
+clean_doom :
+	$(RM) $(RMFLAGS) $(doom_OBJECTS) $(doom_CLEANFILES)
+
+# ----------------------------------------------------------------------------
+# End-Of-File
+# ----------------------------------------------------------------------------

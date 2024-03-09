@@ -1,0 +1,6 @@
+src/*.o
+src/doom.bin
+src/doom.html
+src/doom.js
+src/doom.wasm
+src/doom.data
