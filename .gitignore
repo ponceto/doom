@@ -1,0 +1,8 @@
+*.bin
+*.a
+*.o
+bin/doom.bin
+bin/doom.html
+bin/doom.js
+bin/doom.wasm
+bin/doom.data
