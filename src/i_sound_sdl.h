@@ -1,5 +1,5 @@
 /*
- * i_sound_sdl.h - Copyright (c) 2024 - Olivier Poncet
+ * i_sound_sdl.h - Copyright (c) 2024-2025 - Olivier Poncet
  *
  * DOOM - Copyright (C) 1993-1996 by id Software, Inc.
  *
